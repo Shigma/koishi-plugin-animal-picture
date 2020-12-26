@@ -144,7 +144,7 @@ module.exports.name = 'koishi-plugin-animal-picture'
 module.exports.apply = (ctx, pluginOptions) => {
   ctx.command('animal [species]')
     .option('gif', '-g')
-    .action(async ({ meta, options }, species) => {
+    .action(async ({ session, options }, species) => {
       let gif = options.gif
       let apiList
       switch (species.toLowerCase()) {
@@ -241,6 +241,6 @@ module.exports.apply = (ctx, pluginOptions) => {
           ]
           break
       }
-      sendImg(meta, apiList)
+      sendImg(session, apiList)
     })
 }
