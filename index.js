@@ -127,7 +127,6 @@ const shibeOnline = async () => {
 const sendImg = async (session, apiList) => {
   let choose = randI(0, apiList.length - 1)
   let img = await apiList[choose].apply()
-  new Logger(session, 'animal').log()
   try {
     if (img) {
       session.$send(`[CQ:image,file=${img}]`)
