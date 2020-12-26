@@ -1,0 +1,22 @@
+{
+  "name": "koishi-plugin-animal-picture",
+  "version": "0.0.1",
+  "description": "Send animal pictures via koishi.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idlist/koishi-plugin-animal-picture.git"
+  },
+  "author": "i'DLisT",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/idlist/koishi-plugin-animal-picture/issues"
+  },
+  "homepage": "https://github.com/idlist/koishi-plugin-animal-picture#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
