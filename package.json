@@ -1,6 +1,6 @@
 {
   "name": "koishi-plugin-animal-picture",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Send animal pictures via koishi.js",
   "main": "index.js",
   "scripts": {

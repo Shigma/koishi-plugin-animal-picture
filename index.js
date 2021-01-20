@@ -106,8 +106,13 @@ const nekosLife = async (species) => {
 
 const floofyBot = async () => {
   try {
-    let res = await axios.get('http://pics.floofybot.moe/owl')
-    let img = res.data.image
+    let test = false
+    let img
+    while (!test) {
+      let res = await axios.get('http://pics.floofybot.moe/owl')
+      img = res.data.image
+      if (img.match(/.(jpe?g|png|gif)$/)) test = true
+    }
     return img
   } catch (err) {
     console.log(err)
