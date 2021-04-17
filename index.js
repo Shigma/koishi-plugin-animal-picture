@@ -139,7 +139,7 @@ const sendImg = async (session, apiList) => {
   }
 }
 
-module.exports.name = 'koishi-plugin-animal-picture'
+module.exports.name = 'animal-picture'
 
 module.exports.apply = (ctx, pluginOptions) => {
   ctx.command('animal [species]')
