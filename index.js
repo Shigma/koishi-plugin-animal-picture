@@ -134,22 +134,31 @@ const sendImg = async (session, apiList) => {
   let img = await apiList[choose].apply()
   try {
     if (img) {
-      session.$send(`[CQ:image,file=${img}]`)
+      session.send(`[CQ:image,file=${img}]`)
     } else {
       throw Error('did not get image url.')
     }
   } catch (err) {
     console.log(err)
-    session.$send('发生了神秘错误。')
+    session.send('发生了神秘错误。')
   }
 }
 
-module.exports.name = 'koishi-plugin-animal-picture'
+Species = [
+  'cat', 'dog(shiba)', 'bunny/rabbit', 'bird', 'duck',
+  'fox', 'lizard', 'panda', 'redpanda', 'koala',
+  'racoon', 'kangaroo', 'owl'
+]
 
-module.exports.apply = (ctx, pluginOptions) => {
-  ctx.command('animal [species]')
-    .option('gif', '-g')
+module.exports.name = 'animal-picture'
+
+module.exports.apply = (ctx, config) => {
+  ctx.command('animal <species>', '动物图')
+    .usage('可用的 species：' + Species.join('、'))
+    .option('gif', '-g 试图请求动图（不一定有用）')
     .action(async ({ session, options }, species) => {
+      if (!species) return '未指定物种。'
+
       let gif = options.gif
       let apiList
       switch (species.toLowerCase()) {
@@ -241,6 +250,7 @@ module.exports.apply = (ctx, pluginOptions) => {
           ]
           break
         case 'shiba':
+        case 'shibe':
           apiList = [
             () => shibeOnline()
           ]
