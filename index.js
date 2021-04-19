@@ -1,5 +1,5 @@
 const axios = require('axios')
-const randI = (min, max) => Math.floor((Math.random() * (max - min + 1)) + min)
+const { Random } = require('koishi-core')
 
 const theCatDogApi = async (species, gif) => {
   try {
@@ -130,8 +130,7 @@ const shibeOnline = async () => {
 }
 
 const sendImg = async (session, apiList) => {
-  let choose = randI(0, apiList.length - 1)
-  let img = await apiList[choose].apply()
+  const img = await Random.pick(apiList)()
   try {
     if (img) {
       session.send(`[CQ:image,file=${img}]`)
