@@ -1,12 +1,12 @@
 const axios = require('axios')
+const { Random } = require('koishi-core')
 
 const APIList = require('./api-list')
 
 const randInt = (min, max) => Math.floor((Math.random() * (max - min + 1)) + min)
 
 const sendImg = async (session, apiList) => {
-  let choose = randInt(0, apiList.length - 1)
-  let img = await apiList[choose].apply()
+  const img = await Random.pick(apiList)()
   try {
     if (img) {
       session.send(`[CQ:image,file=${img}]`)
