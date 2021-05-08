@@ -18,5 +18,8 @@
   "homepage": "https://github.com/idlist/koishi-plugin-animal-picture#readme",
   "dependencies": {
     "axios": "^0.21.1"
+  },
+  "peerDependencies": {
+    "koishi-core": ">=3"
   }
 }

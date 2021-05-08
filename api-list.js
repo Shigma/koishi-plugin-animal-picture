@@ -1,18 +1,16 @@
 module.exports = [
   {
-    species: {
+    mapping: {
       cat: 'cat', dog: 'dog', bird: 'birb', fox: 'fox',
       panda: 'panda', redpanda: 'red_panda', koala: 'koala',
       racoon: 'racoon', kangaroo: 'kangaroo'
     },
     url: 'https://some-random-api.ml/img/{}',
-    replace: true,
     endpoint: 'link', inbound: false
   },
   {
-    species: { cat: 'meow', dog: 'woof' },
+    mapping: { cat: 'meow', dog: 'woof' },
     url: 'https://nekos.life/api/v2/img/{}',
-    replace: true,
     endpoint: 'url', inbound: true
   },
   {
