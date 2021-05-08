@@ -60,7 +60,13 @@ module.exports.apply = (ctx, config) => {
       if (!species) return '未指定物种。'
       if (!SpeciesList.includes(species)) return '没有此物种的图。'
 
-      const api = Random.pick(SpeciesAPI[species])
+      let apiList = [...SpeciesAPI[species]]
+      if (options.gif) {
+        let filteredList = apiList.filter(api => api.gif != '')
+        if (filteredList) apiList = filteredList
+      }
+
+      const api = Random.pick(apiList)
       const apiUrl = api.url + (options.gif ? api.gif : '')
 
       const reqLimit = config.requestLimit
