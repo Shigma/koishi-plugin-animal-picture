@@ -43,11 +43,13 @@ module.exports.apply = (ctx, config) => {
         })
       }
     } else {
-      item.species.forEach(species => SpeciesAPI[species].push({
-        url: item.url,
-        gif: item.gif ?? '',
-        endpoint: item.endpoint
-      }))
+      item.species.forEach(species => {
+        SpeciesAPI[species].push({
+          url: item.url,
+          gif: item.gif ?? '',
+          endpoint: item.endpoint
+        })
+      })
     }
   })
 

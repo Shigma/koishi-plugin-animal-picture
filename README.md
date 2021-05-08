@@ -1,19 +1,55 @@
 # koishi-plugin-animal-picture
 
-一个用于[Koishi](https://github.com/koishijs/koishi)的用来发各种动物图的插件。其实主要是用来学习Git和GitHub以及npm怎么用而搞出来的，所以会有各种各样的bug，而且非常不好用。连help都没写。
+[![npm](https://img.shields.io/npm/v/koishi-plugin-animal-picture?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-animal-picture)
+[![npm-download](https://img.shields.io/npm/dw/koishi-plugin-animal-picture?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-animal-picture)
 
-另外，大部分使用的网络图库API都会大量地使用外网网址，若bot在内网布置的话会有一大堆CQ码裸奔。这个问题大概会提供一个选项，但现在没有。
+一个用于 [**Koishi v3**](https://github.com/koishijs/koishi) 的用来发各种动物图的插件。主要是用来学习 Git， GitHub 和 npm 怎么用而弄出来的，所以会有各种各样的 bug，而且不怎么好用。
 
+图源均为网上搜索的外部图库，不对图片内容负责。
 
+## 安装方法
 
-安装后的调用方法：
+```shell
+npm i koishi-plugin-animal-picture
+```
 
-animal [species] <-g | --gif>
+然后参照 [安装插件](https://koishi.js.org/guide/context.html#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6) 继续安装。
 
-species: 物种，存在cat（猫）、dog（狗）、bunny/rabbit（兔子）、bird/birb（鸟）、duck（鸭子）、fox（狐狸）、lizard（蜥蜴）、panda（大熊猫）、redpanda（小熊猫）、koala（考拉）、racoon（浣熊）、kangaroo（袋鼠）、owl（猫头鹰）。其中可以专门指定shiba（柴犬），调用dog时也会概率出柴犬图。
+## 使用方法
 
--g, --gif: 试图搜索gif。这个指令实际上只有猫图和狗图有用。
+```
+animal <species>
+```
 
+**species**：可查询的物种，通过 `help animal` 或者 `animal -h` 可查看。
 
+| 可选选项    | 默认值  | 说明                    |
+| ----------- | ------- | ----------------------- |
+| `-g, --gif` | `false` | 试图请求 gif 图 **\*1** |
 
-另外，猫头鹰图可能发不出来，原因未调查也暂时懒得修（跑）
+**\*1** 虽然这个选项经常没用，因为这取决于请求图库能不能单独查询 gif 图。另外，设置该值为 false 并不会使得指令不请求 gif 图。
+
+## 插件配置项
+
+这个插件无需任何配置项即可使用，同时也提供了一些可能会用到的配置项。一些不太可能会用到的配置项就摸了。
+
+| 配置项         | 默认值  | 说明                                                         |
+| -------------- | ------- | ------------------------------------------------------------ |
+| `inbound`      | `false` | 是否只使用内网能访问的图源。如果 bot 的服务器在内网，请设置为 `true` |
+| `requestLimit` | 5       | 最大重复请求数。有一些图源返回的图片资源格式并不一定是平台可发送的图片，所以可能需要重复请求。一般情况下不需要更改这个配置项 |
+
+## Q&A
+
+- 为什么有时候 CQ 码会裸奔？
+
+这可能是因为你的服务器的网络太菜了，没法获取到图片。
+
+事实上，一个图片 inbound 与否是由我自己手动测的，所以 it works on my machine。
+
+- 我想要 [ 某个物种 ] 图！
+
+我不会也懒得自建图床，所以如果有野生的随机图片 API 那就很好，但没有的话就摸了。
+
+- 发现了个 bug！
+
+这很正常。
