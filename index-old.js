@@ -1,11 +1,136 @@
 const axios = require('axios')
+const randI = (min, max) => Math.floor((Math.random() * (max - min + 1)) + min)
 
-const APIList = require('./api-list')
+const theCatDogApi = async (species, gif) => {
+  try {
+    let res = await axios.get(`https://api.the${species}api.com/`
+      + `v1/images/search${gif ? '?mime_types=gif' : ''}`)
+    let img = res.data[0].url
+    return img
+  } catch (err) {
+    if (err) console.log(err)
+  }
+}
 
-const randInt = (min, max) => Math.floor((Math.random() * (max - min + 1)) + min)
+const randomCat = async () => {
+  try {
+    let res = await axios.get('https://aws.random.cat/meow')
+    let img = res.data.file
+    return img
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const edgeCats = async () => {
+  try {
+    let res = await axios.get('http://edgecats.net/random')
+    let img = res.data
+    return img
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const dogCeo = async () => {
+  try {
+    let res = await axios.get('https://dog.ceo/api/breeds/image/random')
+    let img = res.data.message
+    return img
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const randomDog = async () => {
+  try {
+    let res = await axios.get('https://random.dog/woof.json')
+    let img = res.data.url
+    return img
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const someRandomApi = async (species) => {
+  try {
+    let res = await axios.get(`https://some-random-api.ml/img/${species}`)
+    let img = res.data.link
+    return img
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const bunniesApi = async () => {
+  try {
+    let res = await axios.get(`https://api.bunnies.io/`
+      + `v2/loop/random/?media=gif`)
+    let img = res.data.media.gif
+    return img
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const randomDuck = async (gif) => {
+  try {
+    let res = await axios.get(`https://random-d.uk/api/v1/random`
+      + `${gif ? '?type=gif' : ''}`)
+    let img = res.data.url
+    return img
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const randomFox = async () => {
+  try {
+    let res = await axios.get('https://randomfox.ca/floof')
+    let img = res.data.image
+    return img
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const nekosLife = async (species) => {
+  try {
+    let res = await axios.get(`https://nekos.life/api/v2/img/${species}`)
+    let img = res.data.url
+    return img
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const floofyBot = async () => {
+  try {
+    let test = false
+    let img
+    while (!test) {
+      let res = await axios.get('http://pics.floofybot.moe/owl')
+      img = res.data.image
+      if (img.match(/.(jpe?g|png|gif)$/)) test = true
+    }
+    return img
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const shibeOnline = async () => {
+  try {
+    let res = await axios.get('http://shibe.online/api/shibes')
+    let img = res.data[0]
+    return img
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 const sendImg = async (session, apiList) => {
-  let choose = randInt(0, apiList.length - 1)
+  let choose = randI(0, apiList.length - 1)
   let img = await apiList[choose].apply()
   try {
     if (img) {
