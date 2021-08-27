@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { s, Random } = require('koishi-core')
+const { s, Random } = require('koishi')
 
 let APIList = require('./api-list')
 APIList.map(item => {
@@ -17,8 +17,16 @@ class Config {
 
 module.exports.name = 'animal-picture'
 
+/**
+ * @param {import('koishi').Context} ctx
+ * @param {import('./index').ConfigObject} config
+ */
 module.exports.apply = (ctx, config) => {
+  /**
+   * @type {import('./index').ConfigObject}
+   */
   config = new Config(config)
+
   let logger = ctx.logger('animal-picture')
 
   if (config.inbound) {

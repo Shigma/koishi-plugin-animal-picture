@@ -2,7 +2,7 @@
   "name": "koishi-plugin-animal-picture",
   "version": "0.2.1",
   "description": "Send animal pictures via Koishi.js.",
-  "author": "i'DLisT",
+  "author": "i'DLisT <me@idl.ist> (https://idl.ist/)",
   "license": "MIT",
   "keywords": [
     "koishi.js",
