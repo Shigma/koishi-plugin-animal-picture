@@ -4,7 +4,7 @@ const { s, Random } = require('koishi')
 const RawAPIList = require('./api-list')
 
 /**
- * @type {import('./index').TypeAPI[]}
+ * @type {import('./index').APIType[]}
  */
 let APIList = RawAPIList.map(item => {
   if (item.mapping) item.species = Object.keys(item.mapping)
@@ -28,7 +28,7 @@ module.exports.apply = (ctx, config) => {
     ...config
   }
 
-  let logger = ctx.logger('animal-picture')
+  const logger = ctx.logger('animal-picture')
 
   if (config.inbound) {
     APIList = APIList.filter(item => item.inbound == true)

@@ -1,6 +1,6 @@
 import { Context } from 'koishi'
 
-export interface TypeRawAPI {
+export interface RawAPIType {
   mapping?: Record<string, string>,
   species?: string | string[]
   url: string,
@@ -9,7 +9,7 @@ export interface TypeRawAPI {
   inbound: boolean
 }
 
-export interface TypeAPI extends TypeRawAPI {
+export interface APIType extends RawAPIType {
   species: string[]
 }
 
