@@ -1,19 +1,16 @@
-const axios = require('axios')
+const axios = require('axios').default
 const { s, Random } = require('koishi')
 
-let APIList = require('./api-list')
-APIList.map(item => {
-  if ('mapping' in item) item.species = Object.keys(item.mapping)
-  if (typeof item.species == 'string') item.species = [item.species]
-})
+const RawAPIList = require('./api-list')
 
-class Config {
-  constructor(config) {
-    config = { ...config }
-    this.inbound = config.inbound ?? false
-    this.requestLimit = config.requestLimit ?? 5
-  }
-}
+/**
+ * @type {import('./index').TypeAPI[]}
+ */
+let APIList = RawAPIList.map(item => {
+  if (item.mapping) item.species = Object.keys(item.mapping)
+  if (typeof item.species == 'string') item.species = [item.species]
+  return item
+})
 
 module.exports.name = 'animal-picture'
 
@@ -25,7 +22,11 @@ module.exports.apply = (ctx, config) => {
   /**
    * @type {import('./index').ConfigObject}
    */
-  config = new Config(config)
+  config = {
+    inbound: false,
+    requestLimit: 5,
+    ...config
+  }
 
   let logger = ctx.logger('animal-picture')
 
@@ -79,8 +80,8 @@ module.exports.apply = (ctx, config) => {
 
       const reqLimit = config.requestLimit
       try {
-        let req, res
-        for (req = 0; req < reqLimit; req++) {
+        let request, res
+        for (request = 0; request < reqLimit; request++) {
           res = (await axios.get(apiUrl)).data
           let endpoint = api.endpoint == '' ? [] : api.endpoint.split('.')
 
@@ -92,14 +93,12 @@ module.exports.apply = (ctx, config) => {
           if (res.match(/.(jpe?g|png|gif)$/)) break
         }
 
-        if (req < reqLimit) {
-          return s('image', { url: res })
-        } else {
-          return '没有请求到能够用于发送的图片……'
-        }
+        if (request >= reqLimit) return '没有请求到能够用于发送的图片……'
+
+        return s('image', { url: res })
       } catch (err) {
-        logger.warn('Something wrong happened during the request of the image.')
-        console.log(err)
+        logger.warn('Something wrong happened during the request of the image')
+        logger.warn(err)
         return '发生了神秘错误。'
       }
     })

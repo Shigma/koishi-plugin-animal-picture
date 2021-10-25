@@ -1,25 +1,35 @@
 import { Context } from 'koishi'
 
+export interface TypeRawAPI {
+  mapping?: Record<string, string>,
+  species?: string | string[]
+  url: string,
+  endpoint: string,
+  gif?: boolean
+  inbound: boolean
+}
+
+export interface TypeAPI extends TypeRawAPI {
+  species: string[]
+}
+
 export interface ConfigObject {
   /**
-   * Whether to only use the APIs that can visited in China mainland.
-   * Set it to `true` if it is so.
+   * 是否只使用在大陆能访问的 API。
    *
    * @default false
    */
   inbound?: boolean
   /**
-   * Maximum repeat request number.
+   * 最大重复请求数。
    *
-   * Some API returns non-sendable image formats (like `gifv`)
-   * when making request.
+   * 有一些 API 会返回 .gifv 这种无法发送的图片，只能重复请求撞运气。
    *
-   *
-   * Normally this option need not to be changed.
+   * 一般而言，不需要动这个配置项。
    *
    * @default 5
    */
   requestLimit?: number
 }
 
-export const apply: (ctx: Context, config: ConfigObject) => void
+export declare const apply: (ctx: Context, config: ConfigObject) => void
