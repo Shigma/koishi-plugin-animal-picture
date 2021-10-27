@@ -63,11 +63,13 @@ module.exports.apply = (ctx, config) => {
   })
 
   ctx.command('animal <species>', '动物图')
-    .usage('可用的 species: ' + SpeciesList.join(', '))
+    .usage(`可用的 species: ${SpeciesList.join(', ')}`)
     .option('gif', '-g 试图请求动图（不一定有用）')
-    .action(async ({ options }, species) => {
-      if (!species) return '未指定物种。'
-      if (!SpeciesList.includes(species)) return '没有此物种的图。'
+    .action(async ({ session, options }, species) => {
+      if (!species) return session.execute('help animal')
+      if (!SpeciesList.includes(species)) {
+        return `没有此物种的图。\n可用的物种有：${SpeciesList.join(', ')}`
+      }
 
       let apiList = [...SpeciesAPI[species]]
       if (options.gif) {
