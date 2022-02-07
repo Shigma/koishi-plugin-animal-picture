@@ -1,6 +1,6 @@
 {
   "name": "koishi-plugin-animal-picture",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "Send animal pictures via Koishi.js.",
   "author": "i'DLisT <me@idl.ist> (https://idl.ist/)",
   "license": "MIT",
@@ -18,10 +18,8 @@
   "homepage": "https://github.com/idlist/koishi-plugin-animal-picture#readme",
   "main": "index.js",
   "scripts": {},
-  "dependencies": {
-    "axios": "^0.24.0"
-  },
+  "dependencies": {},
   "peerDependencies": {
-    "koishi-core": ">=3"
+    "koishi": "^4.0.0"
   }
 }

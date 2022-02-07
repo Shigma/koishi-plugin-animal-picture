@@ -1,4 +1,3 @@
-const axios = require('axios').default
 const { s, Random } = require('koishi')
 
 const RawAPIList = require('./api-list')
@@ -44,7 +43,7 @@ module.exports.apply = (ctx, config) => {
   SpeciesList.forEach(species => SpeciesAPI[species] = [])
   APIList.forEach(item => {
     if ('mapping' in item) {
-      for (let [species, value] of Object.entries(item.mapping)) {
+      for (const [species, value] of Object.entries(item.mapping)) {
         SpeciesAPI[species].push({
           url: item.url.replace('{}', value),
           gif: item.gif ?? '',
@@ -73,31 +72,24 @@ module.exports.apply = (ctx, config) => {
 
       let apiList = [...SpeciesAPI[species]]
       if (options.gif) {
-        let filteredList = apiList.filter(api => api.gif != '')
+        const filteredList = apiList.filter(api => api.gif != '')
         if (filteredList) apiList = filteredList
       }
 
       const api = Random.pick(apiList)
       const apiUrl = api.url + (options.gif ? api.gif : '')
 
-      const reqLimit = config.requestLimit
       try {
-        let request, res
-        for (request = 0; request < reqLimit; request++) {
-          res = (await axios.get(apiUrl)).data
-          let endpoint = api.endpoint == '' ? [] : api.endpoint.split('.')
+        let data
+        data = await ctx.http.get(apiUrl)
+        const endpoint = api.endpoint == '' ? [] : api.endpoint.split('.')
 
-          for (let urlSeg of endpoint) {
-            if (urlSeg == '[]') res = res[0]
-            else res = res[urlSeg]
-          }
-
-          if (res.match(/.(jpe?g|png|gif)$/)) break
+        for (const urlSeg of endpoint) {
+          if (urlSeg == '[]') data = data[0]
+          else data = data[urlSeg]
         }
 
-        if (request >= reqLimit) return '没有请求到能够用于发送的图片……'
-
-        return s('image', { url: res })
+        return s('image', { url: data })
       } catch (err) {
         logger.warn('Something wrong happened during the request of the image')
         logger.warn(err)

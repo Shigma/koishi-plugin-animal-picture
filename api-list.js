@@ -63,10 +63,5 @@ module.exports = [
     species: 'fox',
     url: 'https://randomfox.ca/floof',
     endpoint: 'image', inbound: true
-  },
-  {
-    species: 'owl',
-    url: 'http://pics.floofybot.moe/owl',
-    endpoint: 'image', inbound: false
   }
 ]
