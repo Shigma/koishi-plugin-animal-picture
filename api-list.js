@@ -24,11 +24,6 @@ module.exports = [
   },
   {
     species: 'cat',
-    url: 'https://aws.random.cat/meow',
-    endpoint: 'file', inbound: true
-  },
-  {
-    species: 'cat',
     url: 'http://edgecats.net/random',
     endpoint: '', inbound: false
   },
