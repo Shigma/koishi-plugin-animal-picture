@@ -23,8 +23,7 @@ module.exports.apply = (ctx, config) => {
    */
   config = {
     inbound: false,
-    requestLimit: 5,
-    ...config
+    ...config,
   }
 
   const logger = ctx.logger('animal-picture')
@@ -47,7 +46,7 @@ module.exports.apply = (ctx, config) => {
         SpeciesAPI[species].push({
           url: item.url.replace('{}', value),
           gif: item.gif ?? '',
-          endpoint: item.endpoint
+          endpoint: item.endpoint,
         })
       }
     } else {
@@ -55,7 +54,7 @@ module.exports.apply = (ctx, config) => {
         SpeciesAPI[species].push({
           url: item.url,
           gif: item.gif ?? '',
-          endpoint: item.endpoint
+          endpoint: item.endpoint,
         })
       })
     }
