@@ -1,4 +1,4 @@
-const { s, Random } = require('koishi')
+const { s, Random, Schema: S } = require('koishi')
 
 const RawAPIList = require('./api-list')
 
@@ -12,6 +12,11 @@ let APIList = RawAPIList.map(item => {
 })
 
 module.exports.name = 'animal-picture'
+
+module.exports.schema = S.object({
+  inbound: S.boolean().default(false)
+    .description('是否只使用在大陆能访问的 API。'),
+})
 
 /**
  * @param {import('koishi').Context} ctx

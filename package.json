@@ -1,6 +1,6 @@
 {
   "name": "koishi-plugin-animal-picture",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Send animal pictures via Koishi.js.",
   "author": "i'DLisT <me@idl.ist> (https://idl.ist/)",
   "license": "MIT",
