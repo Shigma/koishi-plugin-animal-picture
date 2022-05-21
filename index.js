@@ -2,9 +2,7 @@ const { s, Random, Schema: S } = require('koishi')
 
 const RawAPIList = require('./api-list')
 
-/**
- * @type {import('./index').APIType[]}
- */
+/** @type {import('./index').APIType[]} */
 let APIList = RawAPIList.map(item => {
   if (item.mapping) item.species = Object.keys(item.mapping)
   if (typeof item.species == 'string') item.species = [item.species]
@@ -20,18 +18,15 @@ module.exports.schema = S.object({
 
 /**
  * @param {import('koishi').Context} ctx
- * @param {import('./index').ConfigObject} config
+ * @param {import('./index').Config} config
  */
 module.exports.apply = (ctx, config) => {
-  /**
-   * @type {import('./index').ConfigObject}
-   */
   config = {
     inbound: false,
     ...config,
   }
 
-  const logger = ctx.logger('animal-picture')
+  const log = ctx.logger('animal-picture')
 
   if (config.inbound) {
     APIList = APIList.filter(item => item.inbound == true)
@@ -95,8 +90,8 @@ module.exports.apply = (ctx, config) => {
 
         return s('image', { url: data })
       } catch (err) {
-        logger.warn('Something wrong happened during the request of the image')
-        logger.warn(err)
+        log.warn('Something wrong happened during the request of the image')
+        log.warn(err)
         return '发生了神秘错误。'
       }
     })

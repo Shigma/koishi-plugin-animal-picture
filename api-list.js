@@ -1,6 +1,4 @@
-/**
- * @type {import('./index').TypeRawAPI[]}
- */
+/** @type {import('./index').RawAPIType} */
 module.exports = [
   {
     mapping: {

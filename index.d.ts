@@ -13,7 +13,7 @@ export interface APIType extends RawAPIType {
   species: string[]
 }
 
-export interface ConfigObject {
+export interface Config {
   /**
    * 是否只使用在大陆能访问的 API。
    *
@@ -22,4 +22,4 @@ export interface ConfigObject {
   inbound?: boolean
 }
 
-export declare const apply: (ctx: Context, config: ConfigObject) => void
+export declare const apply: (ctx: Context, config: Config) => void

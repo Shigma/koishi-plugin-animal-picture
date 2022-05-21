@@ -53,6 +53,9 @@ animal <species>
 
 ## 更新记录
 
+<details>
+<summary><b>v1.0</b> （用于 Koishi v4）</summary>
+
 ### v1.0.2
 
 - 增加了对控制台 Schema 的支持，并修复了文档。
@@ -66,4 +69,4 @@ animal <species>
 - 对 v4 做了一个很简陋的适配。
 - 因为删掉了一个失效图源，配置项 `requestLimit` 不再起作用而被删除。
 
-  如果仍然需要用于 v3 版本，请使用 v0.2 版本。
+</details>
