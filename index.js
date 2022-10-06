@@ -1,4 +1,4 @@
-const { s, Random, Schema: S } = require('koishi')
+const { segment, Random, Schema: S } = require('koishi')
 
 const RawAPIList = require('./api-list')
 
@@ -88,7 +88,7 @@ module.exports.apply = (ctx, config) => {
           else data = data[urlSeg]
         }
 
-        return s('image', { url: data })
+        return segment('image', { url: data })
       } catch (err) {
         log.warn('Something wrong happened during the request of the image')
         log.warn(err)
